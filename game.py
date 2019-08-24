@@ -31,7 +31,12 @@ while 1:
     screen.blit(castle,(0,135))
     screen.blit(castle,(0,240))
     screen.blit(castle,(0,345 ))
-    screen.blit(player, playerpos)
+    # 6.1 - Set player position and rotation
+    position = pygame.mouse.get_pos()
+    angle = math.atan2(position[1]-(playerpos[1]+32),position[0]-(playerpos[0]+26))
+    playerrot = pygame.transform.rotate(player, 360-angle*57.29)
+    playerpos1 = (playerpos[0]-playerrot.get_rect().width/2, playerpos[1]-playerrot.get_rect().height/2)
+    screen.blit(playerrot, playerpos1)
     # 7 - update the screen
     pygame.display.flip()
     # 8 - loop through the events
